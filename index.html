@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动端简历</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="reset.css"/>
+    <link rel="stylesheet" href="swiper.min.css"/>
+    <link rel="stylesheet" href="animate.min.css"/>
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+<section class="main">
+    <!--music-->
+    <div class="music" id="musicMenu">
+        <audio src="audio/beyond.mp3" preload="none" loop id="musicAudio"></audio>
+    </div>
+
+    <!-- 内容区域-->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page1">
+                <!-- slide1-->
+                <img class="ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" src="img/page1-text1.png"
+                     swiper-animate-delay="0s" alt=""/>
+                <img class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s"
+                     src="img/page1-text2.png" swiper-animate-delay="0s" alt=""/>
+                <img class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" src="img/page1-text3.png"
+                     swiper-animate-delay="0s" alt=""/>
+                <img class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s"
+                     src="img/page1-text4.png" swiper-animate-delay="1s" alt=""/>
+                <!--<img class="ani arror" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0s" src="img/arror.jpg" alt=""/>-->
+            </div>
+            <div class="swiper-slide page2">
+                <!-- slide2-->
+                <img class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s"
+                     src="img/page2-text1.png" swiper-animate-delay="0s" alt=""/>
+                <img class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1s"
+                     src="img/page2-text2.png" swiper-animate-delay="0.5s" alt=""/>
+                <img class="ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s"
+                     src="img/page2-text3.png" swiper-animate-delay="1.5s" alt=""/>
+                <img class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="1s"
+                     src="img/page2-text4.png" swiper-animate-delay="2.5s" alt=""/>
+                <!--<img class="ani arror" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="0s" src="img/arror.jpg" alt=""/>-->
+            </div>
+        </div>
+    </div>
+
+    <!-- 箭头区域-->
+    <div class="arror"></div>
+</section>
+</body>
+<script src="swiper.jquery.min.js"></script>
+<script src="swiper.min.js"></script>
+<script src="swiper.animate1.0.2.min.js"></script>
+<script>
+    (function () {
+        var desW = 640;
+        var winW = document.documentElement.clientWidth;
+        var scale = winW / desW;
+        var oMain = document.getElementById('main');
+        if (desW < winW) {
+            oMain.style.margin = '0 auto';
+            oMain.style.width = desW + 'px';
+            return;
+        }
+        document.documentElement.style.fontSize = scale * 100 + 'px';
+    })();
+
+    var mySwiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        loop: true,
+        oInit: function (swiper) {
+            swiperAnimateCache(swiper);
+            swiperAnimate(swiper);
+        },
+        onSlideChangeEnd: function (swiper) {
+            swiperAnimate(swiper);
+        }
+    });
+
+    (function () {
+        var musicMenu = document.getElementById('musicMenu');
+        var musicAudio = document.getElementById('musicAudio');
+        musicMenu.addEventListener("click", function () {
+            if (musicAudio.paused) { //当前处于暂停状态
+                musicAudio.play();//播放
+                musicMenu.className = 'music move';
+                return;
+            }
+            musicAudio.pause();
+            musicMenu.className = 'music';
+        }, false);
+        function controlMusic() {
+            musicAudio.volume = 0.1;
+            musicAudio.play();
+            //是否能够播放， 如果能播放
+            musicAudio.addEventListener('canplay', function () {
+                musicMenu.style.display = "block";
+                musicMenu.className = "music move";
+            }, false);
+        }
+
+        window.setTimeout(controlMusic, 1000);
+    })();
+</script>
+</html>

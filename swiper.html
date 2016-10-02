@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="reset.css"/>
+    <link rel="stylesheet" href="swiper.min.css"/>
+    <style>
+        /*假设：设计稿是640*1136 轮播图640*300*/
+        html {
+            font-size: 100px;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .swiper-container {
+            height: 3rem;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            height: 3rem;
+        }
+
+        .swiper-wrapper img {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-pagination-bullet-active{
+            background-color: red;
+        }
+        .swiper-pagination-bullet{
+            width: 0.08rem;
+            height: 0.08rem;
+        }
+        .swiper-button-prev, .swiper-button-next{
+            width: 0.35rem;
+            height: 0.44rem;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<section class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img data-src="../img/banner/banner-1.jpg" alt="" class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div>
+        <div class="swiper-slide"><img data-src="../img/banner/banner-2.jpg" alt="" class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div>
+        <div class="swiper-slide"><img data-src="../img/banner/banner-3.jpg" alt="" class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div>
+        <div class="swiper-slide"><img data-src="../img/banner/banner-4.jpg" alt="" class="swiper-lazy"/><div class="swiper-lazy-preloader"></div></div>
+    </div>
+    <!-- 分页-->
+    <div class="swiper-pagination"></div>
+
+    <!-- 左右按钮，上一页，下一页-->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</section>
+</body>
+<script src="swiper.jquery.min.js"></script>
+<script src="swiper.min.js"></script>
+
+<script type="text/javascript">
+    //rem响应式布局
+    (function () {
+        var desW = 640;
+        var winW = document.documentElement.clientWidth;
+        var scale = winW / desW;
+        document.documentElement.style.fontSize = scale * 100 + 'px';
+    })();
+    //初始化swiper
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+
+        autoplayDisableOnInteraction : false,
+        autoplay: 2000,
+//        paginationType: 'progress',
+//        autoplayStopOnLast: true,
+//        grabCursor:true
+        lazyLoading : true,
+        effect : 'coverflow',
+
+        onInit: function (swiper) {
+            console.log(swiper instanceof Swiper);
+        }
+    })
+</script>
+</html>
